@@ -1,3 +1,7 @@
-module.exports = function createBaseUrl(baseUrl) {
-  return baseUrl.toString().toLowerCase();
+module.exports = function createBaseUrl(baseUrl = "") {
+  if (baseUrl !== "") {
+    return baseUrl.toString().toLowerCase();
+  }
+
+  return;
 };

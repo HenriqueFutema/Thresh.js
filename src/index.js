@@ -4,19 +4,16 @@ const { of } = require("rxjs");
 
 const createXHR = require("./createBase/createXHR");
 
-const baseUrl = require("./tests/index");
-
 module.exports = {
-  getObservable(url, verb = "") {
+  getObservable(url = "", endPoint = "/", verb = "") {
     if (verb == "") {
       return console.log("Request require a verb");
-      console.log(baseUrl);
     }
 
     verb = verb.toUpperCase();
     const obs$ = ajax({
       createXHR,
-      url: `${url}`,
+      url: `${url}${endPoint}`,
       crossDomain: true,
       withCredentials: false,
       method: verb
