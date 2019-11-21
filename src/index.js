@@ -1,13 +1,13 @@
 const { ajax } = require("rxjs/ajax");
-const { map, catchError } = require("rxjs/operators");
-const { of } = require("rxjs");
+const { map, catchError, take, first, pipe } = require("rxjs/operators");
+const { of, from } = require("rxjs");
 
 const createXHR = require("./createBase/createXHR");
 
 module.exports = {
   getObservable(url = "", endPoint = "/", verb = "") {
-    if (verb == "") {
-      return console.log("Request require a verb");
+    if (url === "" || endPoint === "" || verb === "") {
+      return console.log("Request require a params url, endPoint, verb");
     }
 
     verb = verb.toUpperCase();
@@ -26,10 +26,24 @@ module.exports = {
       })
     );
 
-    obs$.subscribe(val => console.log(val));
+    obs$.subscribe(val => {
+      console.log(val);
+
+      return val;
+    });
   },
 
-  getObservableWithTake() {
-    return;
+  getObservableWithTake(values = [], numTake = 1) {
+    if (values !== []) {
+      let source = from(values);
+
+      let val = source.pipe(take(numTake));
+
+      val.subscribe(response => {
+        console.log(response);
+
+        return response;
+      });
+    }
   }
 };
