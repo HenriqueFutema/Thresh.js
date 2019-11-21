@@ -6,6 +6,7 @@ const {
   first,
   last,
   distinct,
+  mergeAll,
   pipe
 } = require("rxjs/operators");
 const { of, from } = require("rxjs");
@@ -89,5 +90,23 @@ module.exports = {
 
       return response;
     });
+  },
+
+  getObservableMerge(...args) {
+    const arraysToMerge = [];
+    const finalArray = [];
+
+    for (let i = 0; i < args.length; i++) {
+      arraysToMerge[i] = args[i];
+    }
+
+    const arrays = from(arraysToMerge);
+
+    const arrayMerge = arrays.pipe(mergeAll(arrays));
+
+    arrayMerge.subscribe(val => finalArray.push(val));
+    console.log(finalArray);
+
+    return finalArray;
   }
 };
