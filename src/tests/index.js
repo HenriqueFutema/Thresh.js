@@ -14,3 +14,5 @@ methodsObservable.getObservableWithTake(["a", "b", "c", "d", "e"], 2);
 
 methodsObservable.getObservableFirst(["a", "b", "c", "d", "e"]);
 methodsObservable.getObservableLast(["a", "b", "c", "d", "e"]);
+
+methodsObservable.getObservableDistinct(["a", "b", "b", "c", "d", "e"]);

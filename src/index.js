@@ -77,5 +77,17 @@ module.exports = {
 
       return response;
     });
+  },
+
+  getObservableDistinct(values = []) {
+    let source = from(values);
+
+    let val = source.pipe(distinct());
+
+    val.subscribe(response => {
+      console.log(response);
+
+      return response;
+    });
   }
 };
