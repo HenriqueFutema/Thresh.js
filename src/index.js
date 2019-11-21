@@ -1,5 +1,13 @@
 const { ajax } = require("rxjs/ajax");
-const { map, catchError, take, first, pipe } = require("rxjs/operators");
+const {
+  map,
+  catchError,
+  take,
+  first,
+  last,
+  distinct,
+  pipe
+} = require("rxjs/operators");
 const { of, from } = require("rxjs");
 
 const createXHR = require("./createBase/createXHR");
@@ -51,6 +59,18 @@ module.exports = {
     let source = from(values);
 
     let val = source.pipe(first());
+
+    val.subscribe(response => {
+      console.log(response);
+
+      return response;
+    });
+  },
+
+  getObservableLast(values = []) {
+    let source = from(values);
+
+    let val = source.pipe(last());
 
     val.subscribe(response => {
       console.log(response);
