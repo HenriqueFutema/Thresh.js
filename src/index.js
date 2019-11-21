@@ -45,5 +45,17 @@ module.exports = {
         return response;
       });
     }
+  },
+
+  getObservableFirst(values = []) {
+    let source = from(values);
+
+    let val = source.pipe(first());
+
+    val.subscribe(response => {
+      console.log(response);
+
+      return response;
+    });
   }
 };
