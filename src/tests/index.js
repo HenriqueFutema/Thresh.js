@@ -23,6 +23,3 @@ methodsObservable.getObservableMerge(
   ["f", "g"],
   ["h"]
 );
-
-// const params = {}
-// methodObeservablePersonable.getObservablePersonable(["a", "b", "b", "c", "d", "e"], params)
